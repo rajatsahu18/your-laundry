@@ -1,8 +1,6 @@
 import {
-  StyleSheet,
   Text,
   View,
-  SafeAreaView,
   ScrollView,
   Pressable,
 } from "react-native";
@@ -18,6 +16,7 @@ import {
 import { decrementQty, incrementQty } from "../ProductReducer";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
+import { styles } from "./styles/cartStyles";
 
 const CartScreen = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -44,20 +43,14 @@ const CartScreen = () => {
   };
   return (
     <>
-      <ScrollView style={{ marginTop: 50 }}>
+      <ScrollView style={styles.cartScroll}>
         {total === 0 ? (
-          <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <Text style={{ marginTop: 40 }}>Your cart is empty</Text>
+          <View style={styles.cartEmptyView}>
+            <Text style={styles.cartText}>Your cart is empty</Text>
           </View>
         ) : (
           <>
-            <View
-              style={{
-                padding: 10,
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
+            <View style={styles.cartHeader}>
               <Ionicons
                 onPress={() => navigation.goBack()}
                 name="arrow-back"
@@ -67,70 +60,24 @@ const CartScreen = () => {
               <Text>Your Bucket</Text>
             </View>
 
-            <Pressable
-              style={{
-                backgroundColor: "white",
-                borderRadius: 12,
-                marginLeft: 10,
-                marginRight: 10,
-                padding: 14,
-              }}
-            >
-              {cart.map((item, index) => (
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    marginVertical: 12,
-                  }}
-                  key={index}
-                >
-                  <Text style={{ width: 100, fontSize: 16, fontWeight: "500" }}>
-                    {item.name}
-                  </Text>
+            <Pressable style={styles.cartItems}>
+              {cart?.map((item, index) => (
+                <View style={styles.cartItemsView} key={index}>
+                  <Text style={styles.itemName}>{item.name}</Text>
 
                   {/* - + button */}
-                  <Pressable
-                    style={{
-                      flexDirection: "row",
-                      paddingHorizontal: 10,
-                      paddingVertical: 5,
-                      alignItems: "center",
-                      borderColor: "#BEBEBE",
-                      borderWidth: 0.5,
-                      borderRadius: 10,
-                    }}
-                  >
+                  <Pressable style={styles.quantityPressable}>
                     <Pressable
                       onPress={() => {
                         dispatch(decrementQuantity(item)); // cart
                         dispatch(decrementQty(item)); // product
                       }}
                     >
-                      <Text
-                        style={{
-                          fontSize: 20,
-                          color: "#088F8F",
-                          paddingHorizontal: 6,
-                          fontWeight: "600",
-                        }}
-                      >
-                        -
-                      </Text>
+                      <Text style={styles.quantitySign}>-</Text>
                     </Pressable>
 
                     <Pressable>
-                      <Text
-                        style={{
-                          fontSize: 19,
-                          color: "#088F8F",
-                          paddingHorizontal: 8,
-                          fontWeight: "600",
-                        }}
-                      >
-                        {item.quantity}
-                      </Text>
+                      <Text style={styles.quantity}>{item.quantity}</Text>
                     </Pressable>
 
                     <Pressable
@@ -139,52 +86,34 @@ const CartScreen = () => {
                         dispatch(incrementQty(item)); //product
                       }}
                     >
-                      <Text
-                        style={{
-                          fontSize: 20,
-                          color: "#088F8F",
-                          paddingHorizontal: 6,
-                          fontWeight: "600",
-                        }}
-                      >
-                        +
-                      </Text>
+                      <Text style={styles.quantitySign}>+</Text>
                     </Pressable>
                   </Pressable>
 
-                  <Text style={{ fontSize: 16, fontWeight: "500" }}>
-                    ${item.price * item.quantity}
+                  <Text style={styles.quantityAndPrice}>
+                    ₹ {item.price * item.quantity}
                   </Text>
                 </View>
               ))}
             </Pressable>
 
-            <View style={{ marginHorizontal: 10 }}>
-              <Text style={{ fontSize: 16, fontWeight: "bold", marginTop: 30 }}>
+            <View style={styles.billingView}>
+              <Text style={styles.billingText}>
                 Billing Details
               </Text>
               <View
-                style={{
-                  backgroundColor: "white",
-                  borderRadius: 7,
-                  padding: 10,
-                  marginTop: 15,
-                }}
+                style={styles.billingCard}
               >
                 <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
+                  style={styles.billingCardView}
                 >
                   <Text
-                    style={{ fontSize: 18, fontWeight: "400", color: "gray" }}
+                    style={styles.itemTotalText}
                   >
                     Item Total
                   </Text>
-                  <Text style={{ fontSize: 18, fontWeight: "400" }}>
-                    ₹{total}
+                  <Text style={styles.total}>
+                    ₹ {total}
                   </Text>
                 </View>
 
@@ -197,50 +126,38 @@ const CartScreen = () => {
                   }}
                 >
                   <Text
-                    style={{ fontSize: 18, fontWeight: "400", color: "gray" }}
+                    style={styles.deliveryFeeText}
                   >
-                    Delivery Fee | 1.2KM
+                    Delivery Fee
                   </Text>
                   <Text
-                    style={{
-                      fontSize: 18,
-                      fontWeight: "400",
-                      color: "#088F8F",
-                    }}
+                    style={styles.deliveryFee}
                   >
                     FREE
                   </Text>
                 </View>
 
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                {
+                  total > 100 ? <View style={styles.freeDeliveryView}>
                   <Text
-                    style={{ fontSize: 18, fontWeight: "500", color: "gray" }}
+                    style={styles.freeDeliveryText}
                   >
                     Free Delivery on Your order
                   </Text>
-                </View>
+                </View> : ''
+                }
 
                 <View
-                  style={{
-                    borderColor: "gray",
-                    height: 1,
-                    borderWidth: 0.5,
-                    marginTop: 10,
-                  }}
+                  style={styles.timeDateCard}
                 />
 
                 <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    marginVertical: 10,
-                  }}
+                  style={styles.timeDateCardView}
                 >
                   <Text
-                    style={{ fontSize: 18, fontWeight: "500", color: "gray" }}
+                    style={styles.dateText}
                   >
-                    selected Date
+                    Selected Date
                   </Text>
                   <Text
                     style={{
@@ -254,75 +171,48 @@ const CartScreen = () => {
                 </View>
 
                 <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
+                  style={styles.daysView}
                 >
                   <Text
-                    style={{ fontSize: 18, fontWeight: "500", color: "gray" }}
+                    style={styles.noOfDaysText}
                   >
                     No Of Days
                   </Text>
 
                   <Text
-                    style={{
-                      fontSize: 18,
-                      fontWeight: "400",
-                      color: "#088F8F",
-                    }}
+                    style={styles.noOfDays}
                   >
                     {route.params.no_Of_days}
                   </Text>
                 </View>
 
                 <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    marginVertical: 10,
-                  }}
+                  style={styles.timeView}
                 >
                   <Text
-                    style={{ fontSize: 18, fontWeight: "500", color: "gray" }}
+                    style={styles.timeText}
                   >
                     selected Pick Up Time
                   </Text>
 
                   <Text
-                    style={{
-                      fontSize: 18,
-                      fontWeight: "400",
-                      color: "#088F8F",
-                    }}
+                    style={styles.selectedTime}
                   >
                     {route.params.selectedTime}
                   </Text>
                 </View>
                 <View
-                  style={{
-                    borderColor: "gray",
-                    height: 1,
-                    borderWidth: 0.5,
-                    marginTop: 10,
-                  }}
+                  style={styles.line}
                 />
 
                 <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    marginVertical: 8,
-                  }}
+                  style={styles.payView}
                 >
-                  <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+                  <Text style={styles.pay}>
                     To Pay
                   </Text>
-                  <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                    {total + 95}
+                  <Text style={styles.totalPay}>
+                    {total}
                   </Text>
                 </View>
               </View>
@@ -333,36 +223,17 @@ const CartScreen = () => {
 
       {total === 0 ? null : (
         <Pressable
-          style={{
-            backgroundColor: "#088F8F",
-            marginTop: "auto",
-            padding: 10,
-            marginBottom: 40,
-            margin: 15,
-            borderRadius: 7,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
+          style={styles.totalButton}
+          onPress={placeOrder}
         >
           <View>
-            <Text style={{ fontSize: 17, fontWeight: "600", color: "white" }}>
+            <Text style={styles.totalItemAndPrice}>
               {cart.length} items | $ {total}
-            </Text>
-            <Text
-              style={{
-                fontSize: 15,
-                fontWeight: "400",
-                color: "white",
-                marginVertical: 6,
-              }}
-            >
-              extra charges might apply
             </Text>
           </View>
 
-          <Pressable onPress={placeOrder}>
-            <Text style={{ fontSize: 17, fontWeight: "600", color: "white" }}>
+          <Pressable >
+            <Text style={styles.proceed}>
               Place Order
             </Text>
           </Pressable>
@@ -374,4 +245,3 @@ const CartScreen = () => {
 
 export default CartScreen;
 
-const styles = StyleSheet.create({});
