@@ -1,9 +1,4 @@
-import {
-  Text,
-  View,
-  ScrollView,
-  Pressable,
-} from "react-native";
+import { Text, View, ScrollView, TouchableOpacity } from "react-native";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
@@ -60,61 +55,49 @@ const CartScreen = () => {
               <Text>Your Bucket</Text>
             </View>
 
-            <Pressable style={styles.cartItems}>
+            <TouchableOpacity style={styles.cartItems}>
               {cart?.map((item, index) => (
                 <View style={styles.cartItemsView} key={index}>
                   <Text style={styles.itemName}>{item.name}</Text>
 
                   {/* - + button */}
-                  <Pressable style={styles.quantityPressable}>
-                    <Pressable
+                  <TouchableOpacity style={styles.quantityPressable}>
+                    <TouchableOpacity
                       onPress={() => {
                         dispatch(decrementQuantity(item)); // cart
                         dispatch(decrementQty(item)); // product
                       }}
                     >
                       <Text style={styles.quantitySign}>-</Text>
-                    </Pressable>
+                    </TouchableOpacity>
 
-                    <Pressable>
+                    <TouchableOpacity>
                       <Text style={styles.quantity}>{item.quantity}</Text>
-                    </Pressable>
+                    </TouchableOpacity>
 
-                    <Pressable
+                    <TouchableOpacity
                       onPress={() => {
                         dispatch(incrementQuantity(item)); // cart
                         dispatch(incrementQty(item)); //product
                       }}
                     >
                       <Text style={styles.quantitySign}>+</Text>
-                    </Pressable>
-                  </Pressable>
+                    </TouchableOpacity>
+                  </TouchableOpacity>
 
                   <Text style={styles.quantityAndPrice}>
                     ₹ {item.price * item.quantity}
                   </Text>
                 </View>
               ))}
-            </Pressable>
+            </TouchableOpacity>
 
             <View style={styles.billingView}>
-              <Text style={styles.billingText}>
-                Billing Details
-              </Text>
-              <View
-                style={styles.billingCard}
-              >
-                <View
-                  style={styles.billingCardView}
-                >
-                  <Text
-                    style={styles.itemTotalText}
-                  >
-                    Item Total
-                  </Text>
-                  <Text style={styles.total}>
-                    ₹ {total}
-                  </Text>
+              <Text style={styles.billingText}>Billing Details</Text>
+              <View style={styles.billingCard}>
+                <View style={styles.billingCardView}>
+                  <Text style={styles.itemTotalText}>Item Total</Text>
+                  <Text style={styles.total}>₹ {total}</Text>
                 </View>
 
                 <View
@@ -125,40 +108,24 @@ const CartScreen = () => {
                     marginVertical: 8,
                   }}
                 >
-                  <Text
-                    style={styles.deliveryFeeText}
-                  >
-                    Delivery Fee
-                  </Text>
-                  <Text
-                    style={styles.deliveryFee}
-                  >
-                    FREE
-                  </Text>
+                  <Text style={styles.deliveryFeeText}>Delivery Fee</Text>
+                  <Text style={styles.deliveryFee}>FREE</Text>
                 </View>
 
-                {
-                  total > 100 ? <View style={styles.freeDeliveryView}>
-                  <Text
-                    style={styles.freeDeliveryText}
-                  >
-                    Free Delivery on Your order
-                  </Text>
-                </View> : ''
-                }
+                {total > 100 ? (
+                  <View style={styles.freeDeliveryView}>
+                    <Text style={styles.freeDeliveryText}>
+                      Free Delivery on Your order
+                    </Text>
+                  </View>
+                ) : (
+                  ""
+                )}
 
-                <View
-                  style={styles.timeDateCard}
-                />
+                <View style={styles.timeDateCard} />
 
-                <View
-                  style={styles.timeDateCardView}
-                >
-                  <Text
-                    style={styles.dateText}
-                  >
-                    Selected Date
-                  </Text>
+                <View style={styles.timeDateCardView}>
+                  <Text style={styles.dateText}>Selected Date</Text>
                   <Text
                     style={{
                       fontSize: 18,
@@ -166,54 +133,28 @@ const CartScreen = () => {
                       color: "#088F8F",
                     }}
                   >
-                    {/* {route.params.pickUpDate} */}
+                    {route.params.pickUpDate.toLocaleDateString()}
                   </Text>
                 </View>
 
-                <View
-                  style={styles.daysView}
-                >
-                  <Text
-                    style={styles.noOfDaysText}
-                  >
-                    No Of Days
-                  </Text>
+                <View style={styles.daysView}>
+                  <Text style={styles.noOfDaysText}>No of Days</Text>
 
-                  <Text
-                    style={styles.noOfDays}
-                  >
-                    {route.params.no_Of_days}
-                  </Text>
+                  <Text style={styles.noOfDays}>{route.params.no_Of_days}</Text>
                 </View>
 
-                <View
-                  style={styles.timeView}
-                >
-                  <Text
-                    style={styles.timeText}
-                  >
-                    selected Pick Up Time
-                  </Text>
+                <View style={styles.timeView}>
+                  <Text style={styles.timeText}>Pick Up Time</Text>
 
-                  <Text
-                    style={styles.selectedTime}
-                  >
+                  <Text style={styles.selectedTime}>
                     {route.params.selectedTime}
                   </Text>
                 </View>
-                <View
-                  style={styles.line}
-                />
+                <View style={styles.line} />
 
-                <View
-                  style={styles.payView}
-                >
-                  <Text style={styles.pay}>
-                    To Pay
-                  </Text>
-                  <Text style={styles.totalPay}>
-                    {total}
-                  </Text>
+                <View style={styles.payView}>
+                  <Text style={styles.pay}>To Pay</Text>
+                  <Text style={styles.totalPay}>₹ {total}</Text>
                 </View>
               </View>
             </View>
@@ -222,26 +163,20 @@ const CartScreen = () => {
       </ScrollView>
 
       {total === 0 ? null : (
-        <Pressable
-          style={styles.totalButton}
-          onPress={placeOrder}
-        >
+        <TouchableOpacity style={styles.totalButton} onPress={placeOrder}>
           <View>
             <Text style={styles.totalItemAndPrice}>
-              {cart.length} items | $ {total}
+              {cart.length} items | ₹ {total}
             </Text>
           </View>
 
-          <Pressable >
-            <Text style={styles.proceed}>
-              Place Order
-            </Text>
-          </Pressable>
-        </Pressable>
+          <View>
+            <Text style={styles.proceed}>Place Order</Text>
+          </View>
+        </TouchableOpacity>
       )}
     </>
   );
 };
 
 export default CartScreen;
-

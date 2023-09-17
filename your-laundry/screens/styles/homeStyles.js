@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  homeScroll: { backgroundColor: "#F0F0F0", flex: 1, marginTop: 50 },
+  homeScroll: { backgroundColor: "#E7E9EB", flex: 1, marginTop: 50 },
   locationAndProfile: {
     flexDirection: "row",
     alignItems: "center",

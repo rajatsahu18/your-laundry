@@ -1,3 +1,8 @@
+// import carousel_1 from  '../assets/carousel_1.jpg'
+// import carousel_2 from  '../assets/carousel_2.jpg'
+// import carousel_3 from  '../assets/carousel_3.jpg'
+// import carousel_4 from  '../assets/carousel_4.jpg'
+
 export const services = [
   {
     id: "0",
@@ -22,9 +27,22 @@ export const services = [
 ];
 
 export const carouselImages = [
+  'https://images.unsplash.com/photo-1593855648042-850fa7bf86bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+  'https://images.unsplash.com/photo-1576109135919-aa9bf1e6a975?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+  'https://plus.unsplash.com/premium_photo-1678218575597-5d0a2810825f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+  'https://media.istockphoto.com/id/187740278/photo/house-cleaning-product.jpg?s=612x612&w=0&k=20&c=5kJnXRmcRevCgQxazgE-3l0IWGd4DfLVm_yhpeo1S0Q=',
+  'https://plus.unsplash.com/premium_photo-1682129242439-952d7d2e7902?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
   "https://media.istockphoto.com/id/1247884083/vector/laundry-service-room-vector-illustration-washing-and-drying-machines-with-cleansers-on-shelf.jpg?s=612x612&w=0&k=20&c=myaNEKlqX7R--bzWGDoMI7PhdxG_zdQTKYEBlymJQGk=",
-  "https://images.pexels.com/photos/5591581/pexels-photo-5591581.jpeg?auto=compress&cs=tinysrgb&w=800",
 ];
+
+// export const carouselImages = [
+//   require('../assets/detergents.jpg'),
+//   require('../assets/iron.jpg'),
+//   require('../assets/laundry.jpg'),
+//   require('../assets/personwashing.jpg'),
+//   require('../assets/washingmachine.jpg'),
+//   require('../assets/washedclothes.jpg'),
+// ]
 
 export const products = [
   {

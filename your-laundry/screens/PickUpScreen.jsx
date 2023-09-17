@@ -4,7 +4,7 @@ import {
   View,
   SafeAreaView,
   TextInput,
-  Pressable,
+  TouchableOpacity,
   ScrollView,
   Alert,
 } from "react-native";
@@ -89,7 +89,7 @@ const PickUpScreen = () => {
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {times?.map((item, i) => (
-            <Pressable
+            <TouchableOpacity
               key={i}
               onPress={() => setSelectedTime(item.time)}
               style={
@@ -111,7 +111,7 @@ const PickUpScreen = () => {
               }
             >
               <Text>{item.time}</Text>
-            </Pressable>
+            </TouchableOpacity>
           ))}
         </ScrollView>
         <Text style={styles.deliveryDateText}>
@@ -120,7 +120,7 @@ const PickUpScreen = () => {
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {deliveryTime?.map((item, i) => (
-            <Pressable
+            <TouchableOpacity
               onPress={() => setDelivery(item.name)}
               key={i}
               style={
@@ -143,28 +143,28 @@ const PickUpScreen = () => {
               
             >
               <Text>{item.name}</Text>
-            </Pressable>
+            </TouchableOpacity>
           ))}
         </ScrollView>
       </SafeAreaView>
 
       {total === 0 ? null : (
-        <Pressable
+        <TouchableOpacity
           style={styles.totalButton}
           onPress={proceedToCart}
         >
           <View>
             <Text style={styles.totalItemAndPrice}>
-              {cart.length} items | $ {total}
+              {cart.length} items | ₹ {total}
             </Text>
           </View>
 
-          <Pressable>
+          <View>
             <Text style={styles.proceed}>
               Proceed to Cart
             </Text>
-          </Pressable>
-        </Pressable>
+          </View>
+        </TouchableOpacity>
       )}
     </>
   );

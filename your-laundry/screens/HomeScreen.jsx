@@ -4,7 +4,7 @@ import {
   View,
   SafeAreaView,
   Alert,
-  Pressable,
+  TouchableOpacity,
   Image,
   TextInput,
   ScrollView,
@@ -81,11 +81,13 @@ const HomeScreen = () => {
     const { coords } = await Location.getCurrentPositionAsync();
     if (coords) {
       const { latitude, longitude } = coords;
+      // console.log(coords)
 
       let response = await Location.reverseGeocodeAsync({
         latitude,
         longitude,
       });
+      // console.log(response)
 
       for (let item of response) {
         let address = `${item.name} ${item.city} ${item.postalCode}`;
@@ -123,17 +125,17 @@ const HomeScreen = () => {
 
           {/* Profile */}
 
-          <Pressable
+          <TouchableOpacity
             onPress={() => navigation.navigate("Profile")}
             style={styles.profileImagePress}
           >
             <Image
               style={styles.profileImage}
               source={{
-                uri: "https://lh3.googleusercontent.com/ogw/AAEL6sh_yqHq38z35QMy5Fnb8ZIxicdxCIVM9PeBD2j-=s64-c-mo",
+                uri: "https://lh3.googleusercontent.com/a/ACg8ocKN7GKpxEa0ziIUSMxYCrVG6laVF1xCGtNgctFGQh1aGA=s288-c-no",
               }}
             />
-          </Pressable>
+          </TouchableOpacity>
         </View>
 
         {/* Search Bar */}
@@ -155,17 +157,17 @@ const HomeScreen = () => {
       </ScrollView>
 
       {total === 0 ? null : (
-        <Pressable style={styles.totalButton} onPress={() => navigation.navigate("PickUp")}>
+        <TouchableOpacity style={styles.totalButton} onPress={() => navigation.navigate("PickUp")}>
           <View>
             <Text style={styles.totalItemAndPrice}>
               {cart?.length} items | ₹ {total}
             </Text>
           </View>
 
-          <Pressable>
+          <View>
             <Text style={styles.proceed}>Proceed to pickup</Text>
-          </Pressable>
-        </Pressable>
+          </View>
+        </TouchableOpacity>
       )}
     </>
   );

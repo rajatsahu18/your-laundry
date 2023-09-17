@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Pressable, Image } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -18,7 +18,7 @@ const DressItem = ({ item }) => {
   };
   return (
     <View>
-      <Pressable style={styles.productCard}>
+      <TouchableOpacity style={styles.productCard}>
         <View>
           <Image style={styles.productImage} source={{ uri: item.image }} />
         </View>
@@ -29,8 +29,8 @@ const DressItem = ({ item }) => {
         </View>
 
         {cart?.some((c) => c.id === item.id) ? (
-          <Pressable style={styles.quantityButton}>
-            <Pressable
+          <TouchableOpacity style={styles.quantityButton}>
+            <TouchableOpacity
               onPress={() => {
                 dispatch(decrementQuantity(item)); // cart
                 dispatch(decrementQty(item)); // product
@@ -38,13 +38,13 @@ const DressItem = ({ item }) => {
               style={styles.quantityPressable}
             >
               <Text style={styles.quantitySign}>-</Text>
-            </Pressable>
+            </TouchableOpacity>
 
-            <Pressable>
+            <TouchableOpacity>
               <Text style={styles.totalQuantity}>{item.quantity}</Text>
-            </Pressable>
+            </TouchableOpacity>
 
-            <Pressable
+            <TouchableOpacity
               onPress={() => {
                 dispatch(incrementQuantity(item)); // cart
                 dispatch(incrementQty(item)); //product
@@ -52,14 +52,14 @@ const DressItem = ({ item }) => {
               style={styles.quantityPressable}
             >
               <Text style={styles.quantitySign}>+</Text>
-            </Pressable>
-          </Pressable>
+            </TouchableOpacity>
+          </TouchableOpacity>
         ) : (
-          <Pressable onPress={addItemToCart} style={styles.addButtonPress}>
+          <TouchableOpacity onPress={addItemToCart} style={styles.addButtonPress}>
             <Text style={styles.addButton}>Add</Text>
-          </Pressable>
+          </TouchableOpacity>
         )}
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 };

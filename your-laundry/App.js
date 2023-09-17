@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet } from "react-native";
 // import HomeScreen from './screens/HomeScreen';
-import { Provider } from 'react-redux';
-import { StatusBar } from 'expo-status-bar';
-import StackNavigator from './StackNavigation';
-import store from './store';
+import { Provider } from "react-redux";
+import { StatusBar } from "expo-status-bar";
+import StackNavigator from "./StackNavigation";
+import store from "./store";
 
 export default function App() {
   return (
@@ -17,6 +17,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#E7E9EB",
   },
 });

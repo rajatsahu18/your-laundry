@@ -11,7 +11,7 @@ const Carousel = () => {
         images={carouselImages}
         autoPlay
         circleLoop
-        dotColor={"#13274F"}
+        dotColor="#13274F"
         inactiveDotColor="#90A4AE"
         ImageComponentStyle={{
           borderRadius: 6,

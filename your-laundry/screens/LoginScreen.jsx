@@ -5,7 +5,7 @@ import {
     SafeAreaView,
     KeyboardAvoidingView,
     TextInput,
-    Pressable,
+    TouchableOpacity,
     ActivityIndicator
   } from "react-native";
   import { Ionicons } from "@expo/vector-icons";
@@ -39,6 +39,7 @@ import { styles } from "./styles/authStyle";
     const login = () => {
       signInWithEmailAndPassword(auth,email,password).then((userCredential) => {
         const user = userCredential.user;
+        console.log('userssss', user)
       })
     }
   
@@ -89,22 +90,22 @@ import { styles } from "./styles/authStyle";
               />
             </View>
   
-            <Pressable
+            <TouchableOpacity
             onPress={login}
               style={styles.loginAndSignupButton}
             >
               <Text style={styles.loginAndSignupText}>
                 Login
               </Text>
-            </Pressable>
+            </TouchableOpacity>
   
-            <Pressable onPress={() => navigation.navigate("Register")} style={{ marginTop: 20 }}>
+            <TouchableOpacity onPress={() => navigation.navigate("Register")} style={{ marginTop: 20 }}>
               <Text
                 style={styles.loginAndSignupSwitch}
               >
                 Don't have a account? Sign Up
               </Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>
         )}

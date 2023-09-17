@@ -1,6 +1,6 @@
 import {
   Image,
-  Pressable,
+  TouchableOpacity,
   ScrollView,
   StyleSheet,
   Text,
@@ -16,14 +16,14 @@ const Services = () => {
       <Text style={styles.servicesAvailable}>Services Available</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {services?.map((service, index) => (
-          <Pressable style={styles.servicesPressable} key={index}>
+          <TouchableOpacity style={styles.servicesPressable} key={index}>
             <Image
               source={{ uri: service.image }}
               style={styles.servicesImage}
             />
 
             <Text style={styles.servicesName}>{service.name}</Text>
-          </Pressable>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </View>

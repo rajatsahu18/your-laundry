@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
   },
-  loginAndSignupText: { fontSize: 18, textAlign: "center", color: "white" },
+  loginAndSignupText: { fontSize: 18, textAlign: "center", color: "black" },
 
   loginAndSignupSwitch: {
     textAlign: "center",

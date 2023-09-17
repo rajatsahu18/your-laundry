@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, Button, Pressable } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView, Button, TouchableOpacity } from "react-native";
 import React from "react";
 import LottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -44,11 +44,11 @@ const OrderScreen = () => {
           speed={0.7}
         />
       </SafeAreaView>
-      <Pressable onPress={() => navigation.navigate("Home")}>
+      <TouchableOpacity onPress={() => navigation.navigate("Home")}>
         <Text style={styles.backToHome}>
           Back to home
         </Text>
-      </Pressable>
+      </TouchableOpacity>
     </>
   );
 };
