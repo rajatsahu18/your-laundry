@@ -18,7 +18,7 @@ const AboutScreen = () => {
       <View style={styles.teamMembers}>
         <Text style={styles.teamHeading}>{TEXT.OUR_TEAM}</Text>
         {about?.map((member) => (
-          <View style={styles.member}>
+          <View style={styles.member} key={member.id}>
             <Image
               source={{
                 uri: member.image,

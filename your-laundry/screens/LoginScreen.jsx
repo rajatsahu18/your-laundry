@@ -15,6 +15,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { styles } from "./styles/authStyle";
 import LocationLoadingIndicator from "../utils/LocationLoadingIndicator";
+import { TEXT } from "../utils/constant";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -51,7 +52,7 @@ const LoginScreen = () => {
       ) : (
         <KeyboardAvoidingView>
           <View style={styles.authCard}>
-            <Text style={styles.loginAndSignupText}>Sign In</Text>
+            <Text style={styles.loginAndSignupText}>{TEXT.LOGIN}</Text>
           </View>
           <View style={styles.loginAndSignupContainer}>
             <View style={styles.inputFieldsView}>
@@ -85,7 +86,7 @@ const LoginScreen = () => {
               onPress={login}
               style={styles.loginAndSignupButton}
             >
-              <Text style={styles.loginAndSignupText}>Login</Text>
+              <Text style={styles.loginAndSignupText}>{TEXT.LOGIN}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -93,7 +94,7 @@ const LoginScreen = () => {
               style={{ marginTop: 20 }}
             >
               <Text style={styles.loginAndSignupSwitch}>
-                Don't have a account? Sign Up
+                {TEXT.DONT_HAVE_ACCOUNT}
               </Text>
             </TouchableOpacity>
           </View>

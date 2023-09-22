@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import { TEXT } from '../utils/constant';
 
 const OrderPlacedPage = ({ navigation }) => {
   return (
@@ -9,14 +10,13 @@ const OrderPlacedPage = ({ navigation }) => {
         animation="fadeInDown"
         style={styles.title}
       >
-        Order Placed!
+        {TEXT.ORDER_PLACED}
       </Animatable.Text>
       
       <Animatable.View
         animation="bounceIn"
         style={styles.successIcon}
       >
-        {/* You can replace this with your own success icon */}
         <Text>✔️</Text>
       </Animatable.View>
 
@@ -24,7 +24,7 @@ const OrderPlacedPage = ({ navigation }) => {
         style={styles.button}
         onPress={() => navigation.navigate('Home')}
       >
-        <Text style={styles.buttonText}>Back to Home</Text>
+        <Text style={styles.buttonText}>{TEXT.BACK_HOME}</Text>
       </TouchableOpacity>
     </View>
   );

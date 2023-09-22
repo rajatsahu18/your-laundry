@@ -12,6 +12,7 @@ import { decrementQty, incrementQty } from "../redux/ProductReducer";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { styles } from "./styles/cartStyles";
+import { TEXT } from "../utils/constant";
 
 const CartScreen = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -39,7 +40,7 @@ const CartScreen = () => {
       <ScrollView style={styles.cartScroll}>
         {total === 0 ? (
           <View style={styles.cartEmptyView}>
-            <Text style={styles.cartText}>Your cart is empty</Text>
+            <Text style={styles.cartText}>{TEXT.EMPTY_CART}</Text>
           </View>
         ) : (
           <>
@@ -50,7 +51,7 @@ const CartScreen = () => {
                 size={24}
                 color="black"
               />
-              <Text>Your Bucket</Text>
+              <Text>{TEXT.YOUR_BUCKET}</Text>
             </View>
 
             <TouchableOpacity style={styles.cartItems}>
@@ -91,34 +92,22 @@ const CartScreen = () => {
             </TouchableOpacity>
 
             <View style={styles.billingView}>
-              <Text style={styles.billingText}>Billing Details</Text>
+              <Text style={styles.billingText}>{TEXT.BILLING_ADDRESS}</Text>
               <View style={styles.billingCard}>
                 <View style={styles.billingCardView}>
-                  <Text style={styles.itemTotalText}>Item Total</Text>
+                  <Text style={styles.itemTotalText}>{TEXT.ITEM_TOTAL}</Text>
                   <Text style={styles.total}>₹ {itemTotal}</Text>
-                </View>
-
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    marginVertical: 8,
-                  }}
-                >
-                  <Text style={styles.deliveryFeeText}>Delivery Fee</Text>
-                  <Text style={styles.deliveryFee}>FREE</Text>
                 </View>
 
                 {itemTotal >= 100 ? (
                   <View style={styles.freeDeliveryView}>
                     <Text style={styles.freeDeliveryText}>
-                      Free Delivery on Your order
+                      {TEXT.FREE_DELIVERY_TEXT}
                     </Text>
                   </View>
                 ) : (
                   <View style={styles.billingCardView}>
-                    <Text style={styles.itemTotalText}>Delivery charges</Text>
+                    <Text style={styles.itemTotalText}>{TEXT.DELIVERY_CHARGES}</Text>
                     <Text style={styles.total}>₹ {deliveryCharge}</Text>
                   </View>
                 )}
@@ -126,7 +115,7 @@ const CartScreen = () => {
                 <View style={styles.timeDateCard} />
 
                 <View style={styles.timeDateCardView}>
-                  <Text style={styles.dateText}>Selected Date</Text>
+                  <Text style={styles.dateText}>{TEXT.SELECTED_DATE}</Text>
                   <Text
                     style={{
                       fontSize: 18,
@@ -139,13 +128,13 @@ const CartScreen = () => {
                 </View>
 
                 <View style={styles.daysView}>
-                  <Text style={styles.noOfDaysText}>No of Days</Text>
+                  <Text style={styles.noOfDaysText}>{TEXT.NO_OF_DAYS}</Text>
 
                   <Text style={styles.noOfDays}>{route.params.no_Of_days}</Text>
                 </View>
 
                 <View style={styles.timeView}>
-                  <Text style={styles.timeText}>Pick Up Time</Text>
+                  <Text style={styles.timeText}>{TEXT.SELECTED_TIME}</Text>
 
                   <Text style={styles.selectedTime}>
                     {route.params.selectedTime}
@@ -154,8 +143,8 @@ const CartScreen = () => {
                 <View style={styles.line} />
 
                 <View style={styles.payView}>
-                  <Text style={styles.pay}>To Pay</Text>
-                  <Text style={styles.totalPay}>₹ {total}</Text>
+                  <Text style={styles.pay}>{TEXT.TO_PAY}</Text>
+                  {itemTotal >= 100 ? <Text style={styles.totalPay}> ₹ {itemTotal}</Text> : <Text style={styles.totalPay}> ₹ {total}</Text>}
                 </View>
               </View>
             </View>
@@ -172,7 +161,7 @@ const CartScreen = () => {
           </View>
 
           <View>
-            <Text style={styles.proceed}>Place Order</Text>
+            <Text style={styles.proceed}>{TEXT.PLACE_ORDER}</Text>
           </View>
         </TouchableOpacity>
       )}

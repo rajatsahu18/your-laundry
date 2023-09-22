@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { View, StyleSheet, Text, Animated } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import { TEXT } from "./constant";
 
 const LocationLoadingIndicator = () => {
   const jumpValue = useRef(new Animated.Value(0)).current;
@@ -36,7 +37,7 @@ const LocationLoadingIndicator = () => {
       <Animated.View style={{ transform: [{ translateY: jumpInterpolate }] }}>
         <MaterialIcons name="location-pin" size={32} color="#fd5c63" />
       </Animated.View>
-      <Text style={styles.text}>Fetching location...</Text>
+      <Text style={styles.text}>{TEXT.FETCHING_LOCATION}</Text>
     </View>
   );
 };

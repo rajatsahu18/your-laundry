@@ -12,7 +12,7 @@ import HorizontalDatepicker from "@awrminkhodaei/react-native-horizontal-datepic
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import * as Location from "expo-location";
-import { deliveryTime, times } from "../utils/constant";
+import { TEXT, deliveryTime, times } from "../utils/constant";
 import { styles } from "./styles/pickUpStyles";
 
 const PickUpScreen = () => {
@@ -76,7 +76,7 @@ const PickUpScreen = () => {
     <>
       <SafeAreaView>
         <Text style={styles.addressText}>
-          Enter Address
+          {TEXT.ENTER_ADDRESS}
         </Text>
         <TextInput
           style={styles.addressTextInput}
@@ -85,7 +85,7 @@ const PickUpScreen = () => {
         />
 
         <Text style={styles.pickUpDate}>
-          Pick Up Date
+          {TEXT.SELECTED_DATE}
         </Text>
         <HorizontalDatepicker
           mode="gregorian"
@@ -104,7 +104,7 @@ const PickUpScreen = () => {
         />
 
         <Text style={styles.pickUpTimeText}>
-          Select Time
+          {TEXT.SELECTED_TIME}
         </Text>
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -135,7 +135,7 @@ const PickUpScreen = () => {
           ))}
         </ScrollView>
         <Text style={styles.deliveryDateText}>
-          Delivery Date
+          {TEXT.DELIVERY_DATE}
         </Text>
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -181,7 +181,7 @@ const PickUpScreen = () => {
 
           <View>
             <Text style={styles.proceed}>
-              Proceed to Cart
+              {TEXT.PROCEED_TO_CART}
             </Text>
           </View>
         </TouchableOpacity>

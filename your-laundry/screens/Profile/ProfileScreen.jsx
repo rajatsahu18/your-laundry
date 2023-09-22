@@ -14,6 +14,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { styles } from "../styles/profileStyles";
+import { TEXT } from "../../utils/constant";
 
 const ProfileScreen = () => {
   const user = auth.currentUser;
@@ -31,7 +32,7 @@ const ProfileScreen = () => {
     <SafeAreaView style={styles.profileView}>
       <View style={styles.profileCard}>
         <View>
-          <Text style={styles.profileName}>Welcome</Text>
+          <Text style={styles.profileName}>{TEXT.WELCOME}</Text>
           <Text style={styles.profileIdAndPhone}>{user.email}</Text>
         </View>
         <View>
@@ -50,7 +51,7 @@ const ProfileScreen = () => {
           onPress={() => navigation.navigate("AllOrders")}
         >
           <Ionicons name="shirt-outline" size={20} color="grey" />
-          <Text style={styles.sectionName}>Your Orders</Text>
+          <Text style={styles.sectionName}>{TEXT.YOUR_ORDERS}</Text>
         </TouchableOpacity>
       </TouchableOpacity>
 
@@ -60,7 +61,7 @@ const ProfileScreen = () => {
           onPress={() => navigation.navigate("About")}
         >
           <AntDesign name="infocirlceo" size={20} color="grey" />
-          <Text style={styles.sectionName}>About</Text>
+          <Text style={styles.sectionName}>{TEXT.ABOUT}</Text>
         </TouchableOpacity>
       </TouchableOpacity>
 
@@ -70,7 +71,7 @@ const ProfileScreen = () => {
           onPress={() => navigation.navigate("Contact")}
         >
           <AntDesign name="phone" size={20} color="grey" />
-          <Text style={styles.sectionName}>Contact</Text>
+          <Text style={styles.sectionName}>{TEXT.CONTACT}</Text>
         </TouchableOpacity>
       </TouchableOpacity>
 
@@ -80,14 +81,14 @@ const ProfileScreen = () => {
           onPress={() => navigation.navigate("Address")}
         >
           <FontAwesome name="address-card-o" size={20} color="grey" />
-          <Text style={styles.sectionName}>Address</Text>
+          <Text style={styles.sectionName}>{TEXT.ADDRESS}</Text>
         </TouchableOpacity>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.profileSections}>
         <TouchableOpacity style={styles.sectionItems} onPress={signOutUser}>
           <AntDesign name="logout" size={20} color="grey" />
-          <Text style={styles.sectionName}>Log Out</Text>
+          <Text style={styles.sectionName}>{TEXT.LOGOUT}</Text>
         </TouchableOpacity>
       </TouchableOpacity>
     </SafeAreaView>

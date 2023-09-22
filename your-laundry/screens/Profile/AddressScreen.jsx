@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import * as Location from "expo-location";
 import { FontAwesome } from "@expo/vector-icons";
 import { styles } from "../styles/addressStyle";
+import { TEXT } from "../../utils/constant";
 
 const AddressScreen = () => {
   useEffect(() => {
@@ -26,7 +27,7 @@ const AddressScreen = () => {
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.addressBook}>Address Book</Text>
+      <Text style={styles.addressBook}>{TEXT.ADDRESS_BOOK}</Text>
       <TouchableOpacity style={styles.details}>
         <FontAwesome name="home" size={24} color="#fd5c63" />
         <Text style={styles.text}>{displayCurrentAddress}</Text>

@@ -21,6 +21,7 @@ import { collection, getDoc, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { styles } from "./styles/homeStyles";
 import LocationLoadingIndicator from "../utils/LocationLoadingIndicator";
+import { TEXT } from "../utils/constant";
 
 const HomeScreen = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -123,7 +124,7 @@ const HomeScreen = () => {
 
           <MaterialIcons name="location-on" size={30} color="#fd5c63" />
           <View>
-            <Text style={styles.location}>Home</Text>
+            <Text style={styles.location}>{TEXT.HOME}</Text>
             <Text>{displayCurrentAddress}</Text>
           </View>
 
@@ -172,7 +173,7 @@ const HomeScreen = () => {
           </View>
 
           <View>
-            <Text style={styles.proceed}>Proceed to pickup</Text>
+            <Text style={styles.proceed}>{TEXT.PROCEED_TO_PICK}</Text>
           </View>
         </TouchableOpacity>
       )}

@@ -17,6 +17,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { styles } from "./styles/authStyle";
+import { TEXT } from "../utils/constant";
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
@@ -55,7 +56,7 @@ const RegisterScreen = () => {
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView>
         <View style={styles.authCard}>
-          <Text style={styles.loginAndSignupText}>Register</Text>
+          <Text style={styles.loginAndSignupText}>{TEXT.REGISTER}</Text>
         </View>
 
         <View style={styles.loginAndSignupContainer}>
@@ -99,7 +100,7 @@ const RegisterScreen = () => {
           </View>
 
           <TouchableOpacity onPress={register} style={styles.loginAndSignupButton}>
-            <Text style={styles.loginAndSignupText}>Register</Text>
+            <Text style={styles.loginAndSignupText}>{TEXT.REGISTER}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -107,7 +108,7 @@ const RegisterScreen = () => {
             style={{ marginTop: 20 }}
           >
             <Text style={styles.loginAndSignupSwitch}>
-              Already have a account? Sign in
+             {TEXT.ALREADY_HAVE_ACCOUNT}
             </Text>
           </TouchableOpacity>
         </View>
