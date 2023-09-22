@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    cartScroll: { marginTop: 50 },
+    cartScroll: { marginTop: 35 },
     cartEmptyView: { justifyContent: "center", alignItems: "center" },
     cartText: { marginTop: 40 },
     cartHeader: {
@@ -34,13 +34,13 @@ export const styles = StyleSheet.create({
     },
     quantity: {
       fontSize: 19,
-      color: "#088F8F",
+      color: "#007AFF",
       paddingHorizontal: 8,
       fontWeight: "600",
     },
     quantitySign: {
       fontSize: 20,
-      color: "#088F8F",
+      color: "#007AFF",
       paddingHorizontal: 6,
       fontWeight: "600",
     },
@@ -65,7 +65,7 @@ export const styles = StyleSheet.create({
   deliveryFee: {
     fontSize: 18,
     fontWeight: "400",
-    color: "#088F8F",
+    color: "#007AFF",
   },
   freeDeliveryView: { flexDirection: "row", alignItems: "center" },
   freeDeliveryText: { fontSize: 18, fontWeight: "500", color: "gray" },
@@ -97,7 +97,7 @@ export const styles = StyleSheet.create({
   noOfDays: {
     fontSize: 18,
     fontWeight: "400",
-    color: "#088F8F",
+    color: "#007AFF",
   },
   
   timeView: {
@@ -112,7 +112,7 @@ export const styles = StyleSheet.create({
   selectedTime: {
     fontSize: 18,
     fontWeight: "400",
-    color: "#088F8F",
+    color: "#007AFF",
   },
   
   line: {
@@ -135,7 +135,7 @@ export const styles = StyleSheet.create({
   
   total: { fontSize: 18, fontWeight: "400" },
     totalButton: {
-      backgroundColor: "#088F8F",
+      backgroundColor: "#007AFF",
       marginTop: "auto",
       padding: 15,
       marginBottom: 15,

@@ -7,13 +7,13 @@ import {
   View,
 } from "react-native";
 import React from "react";
-import { services } from "../utils/constant";
+import { TEXT, services } from "../utils/constant";
 import { styles } from "./servicesStyle";
 
 const Services = () => {
   return (
     <View style={styles.servicesView}>
-      <Text style={styles.servicesAvailable}>Services Available</Text>
+      <Text style={styles.servicesAvailable}>{TEXT.SERVICE_AVAILABLE}</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {services?.map((service, index) => (
           <TouchableOpacity style={styles.servicesPressable} key={index}>

@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    addressText: { fontSize: 16, fontWeight: "500", marginHorizontal: 10, marginTop: 50 },
+    addressText: { fontSize: 16, fontWeight: "500", marginHorizontal: 10, marginTop: 40 },
     addressTextInput: {
       padding: 10,
       borderColor: "gray",
@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     pickUpTimeText: { fontSize: 16, fontWeight: "500", marginHorizontal: 10 },
     deliveryDateText: { fontSize: 16, fontWeight: "500", marginHorizontal: 10 },
     totalButton: {
-      backgroundColor: "#088F8F",
+      backgroundColor: "#007AFF",
       marginTop: "auto",
       padding: 15,
       marginBottom: 15,

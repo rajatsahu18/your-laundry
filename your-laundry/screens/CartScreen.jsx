@@ -7,8 +7,8 @@ import {
   cleanCart,
   decrementQuantity,
   incrementQuantity,
-} from "../CartReducer";
-import { decrementQty, incrementQty } from "../ProductReducer";
+} from "../redux/CartReducer";
+import { decrementQty, incrementQty } from "../redux/ProductReducer";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { styles } from "./styles/cartStyles";
@@ -16,26 +16,24 @@ import { styles } from "./styles/cartStyles";
 const CartScreen = () => {
   const cart = useSelector((state) => state.cart.cart);
   const route = useRoute();
-  const total = cart
+  const deliveryCharge = 20
+  const itemTotal = cart
     .map((item) => item.quantity * item.price)
     .reduce((curr, prev) => curr + prev, 0);
+  const total = itemTotal + deliveryCharge;
   const navigation = useNavigation();
   const userUid = auth.currentUser.uid;
   const dispatch = useDispatch();
+
   const placeOrder = async () => {
     navigation.navigate("Order");
     dispatch(cleanCart());
-    await setDoc(
-      doc(db, "users", `${userUid}`),
-      {
-        orders: { ...cart },
-        pickUpDetails: route.params,
-      },
-      {
-        merge: true,
-      }
-    );
+    await setDoc(doc(db, "users", `${userUid}`), {
+      orders: { ...cart },
+      pickUpDetails: route.params,
+    });
   };
+
   return (
     <>
       <ScrollView style={styles.cartScroll}>
@@ -97,7 +95,7 @@ const CartScreen = () => {
               <View style={styles.billingCard}>
                 <View style={styles.billingCardView}>
                   <Text style={styles.itemTotalText}>Item Total</Text>
-                  <Text style={styles.total}>₹ {total}</Text>
+                  <Text style={styles.total}>₹ {itemTotal}</Text>
                 </View>
 
                 <View
@@ -112,14 +110,17 @@ const CartScreen = () => {
                   <Text style={styles.deliveryFee}>FREE</Text>
                 </View>
 
-                {total > 100 ? (
+                {itemTotal >= 100 ? (
                   <View style={styles.freeDeliveryView}>
                     <Text style={styles.freeDeliveryText}>
                       Free Delivery on Your order
                     </Text>
                   </View>
                 ) : (
-                  ""
+                  <View style={styles.billingCardView}>
+                    <Text style={styles.itemTotalText}>Delivery charges</Text>
+                    <Text style={styles.total}>₹ {deliveryCharge}</Text>
+                  </View>
                 )}
 
                 <View style={styles.timeDateCard} />
@@ -130,7 +131,7 @@ const CartScreen = () => {
                     style={{
                       fontSize: 18,
                       fontWeight: "400",
-                      color: "#088F8F",
+                      color: "#007AFF",
                     }}
                   >
                     {route.params.pickUpDate.toLocaleDateString()}

@@ -1,8 +1,6 @@
 import {
-  StyleSheet,
   Text,
   View,
-  SafeAreaView,
   Alert,
   TouchableOpacity,
   Image,
@@ -17,11 +15,12 @@ import Carousel from "../components/Carousel";
 import Services from "../components/Services";
 import DressItem from "../components/DressItem";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../ProductReducer";
+import { getProducts } from "../redux/ProductReducer";
 import { useNavigation } from "@react-navigation/native";
 import { collection, getDoc, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { styles } from "./styles/homeStyles";
+import LocationLoadingIndicator from "../utils/LocationLoadingIndicator";
 
 const HomeScreen = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -31,13 +30,16 @@ const HomeScreen = () => {
     .reduce((curr, prev) => curr + prev, 0);
   const navigation = useNavigation();
   const [displayCurrentAddress, setDisplayCurrentAddress] = useState(
-    "we are loading your location"
+    "Fetching your location"
   );
   const [locationServicesEnabled, setLocationServicesEnabled] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     checkIfLocationEnabled();
     getCurrentLocation();
+    setLoading(false)
   }, []);
   const checkIfLocationEnabled = async () => {
     let enabled = await Location.hasServicesEnabledAsync();
@@ -81,13 +83,11 @@ const HomeScreen = () => {
     const { coords } = await Location.getCurrentPositionAsync();
     if (coords) {
       const { latitude, longitude } = coords;
-      // console.log(coords)
 
       let response = await Location.reverseGeocodeAsync({
         latitude,
         longitude,
       });
-      // console.log(response)
 
       for (let item of response) {
         let address = `${item.name} ${item.city} ${item.postalCode}`;
@@ -111,7 +111,11 @@ const HomeScreen = () => {
     fetchProducts();
   }, []);
 
-  return (
+  return loading ? (
+    <View style={styles.loadingView}>
+      <LocationLoadingIndicator />
+    </View>
+  ) : (
     <>
       <ScrollView style={styles.homeScroll}>
         <View style={styles.locationAndProfile}>
@@ -132,7 +136,7 @@ const HomeScreen = () => {
             <Image
               style={styles.profileImage}
               source={{
-                uri: "https://lh3.googleusercontent.com/a/ACg8ocKN7GKpxEa0ziIUSMxYCrVG6laVF1xCGtNgctFGQh1aGA=s288-c-no",
+                uri: "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg",
               }}
             />
           </TouchableOpacity>
@@ -157,7 +161,10 @@ const HomeScreen = () => {
       </ScrollView>
 
       {total === 0 ? null : (
-        <TouchableOpacity style={styles.totalButton} onPress={() => navigation.navigate("PickUp")}>
+        <TouchableOpacity
+          style={styles.totalButton}
+          onPress={() => navigation.navigate("PickUp")}
+        >
           <View>
             <Text style={styles.totalItemAndPrice}>
               {cart?.length} items | ₹ {total}

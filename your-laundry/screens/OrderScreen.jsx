@@ -1,56 +1,60 @@
-import { StyleSheet, Text, View, SafeAreaView, Button, TouchableOpacity } from "react-native";
-import React from "react";
-import LottieView from "lottie-react-native";
-import { useNavigation } from "@react-navigation/native";
-import { styles } from "./styles/orderStyles";
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 
-const OrderScreen = () => {
-  const navigation = useNavigation();
-
+const OrderPlacedPage = ({ navigation }) => {
   return (
-    <>
-      <SafeAreaView>
-        <LottieView
-          source={require("../assets/thumbs.json")}
-          style={{
-            height: 360,
-            width: 300,
-            alignSelf: "center",
-            marginTop: 40,
-            justifyContent: "center",
-          }}
-          autoPlay
-          loop={false}
-          speed={0.7}
-        />
+    <View style={styles.container}>
+      <Animatable.Text
+        animation="fadeInDown"
+        style={styles.title}
+      >
+        Order Placed!
+      </Animatable.Text>
+      
+      <Animatable.View
+        animation="bounceIn"
+        style={styles.successIcon}
+      >
+        {/* You can replace this with your own success icon */}
+        <Text>✔️</Text>
+      </Animatable.View>
 
-        <Text
-          style={styles.orderText}
-        >
-          Your order has been placed
-        </Text>
-
-        <LottieView
-          source={require("../assets/sparkle.json")}
-          style={{
-            height: 300,
-            position: "absolute",
-            top: 100,
-            width: 300,
-            alignSelf: "center",
-          }}
-          autoPlay
-          loop={false}
-          speed={0.7}
-        />
-      </SafeAreaView>
-      <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-        <Text style={styles.backToHome}>
-          Back to home
-        </Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('Home')}
+      >
+        <Text style={styles.buttonText}>Back to Home</Text>
       </TouchableOpacity>
-    </>
+    </View>
   );
 };
 
-export default OrderScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f0f0f0',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  successIcon: {
+    fontSize: 64,
+    marginBottom: 30,
+  },
+  button: {
+    backgroundColor: '#007AFF',
+    padding: 15,
+    borderRadius: 8,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
+  },
+});
+
+export default OrderPlacedPage;

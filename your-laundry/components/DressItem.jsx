@@ -1,13 +1,14 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import { Text, View, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
   decrementQuantity,
   incrementQuantity,
-} from "../CartReducer";
-import { decrementQty, incrementQty } from "../ProductReducer";
+} from "../redux/CartReducer";
+import { decrementQty, incrementQty } from "../redux/ProductReducer";
 import { styles } from "./dressItemStyles";
+import { TEXT } from "../utils/constant";
 
 const DressItem = ({ item }) => {
   const dispatch = useDispatch();
@@ -56,7 +57,7 @@ const DressItem = ({ item }) => {
           </TouchableOpacity>
         ) : (
           <TouchableOpacity onPress={addItemToCart} style={styles.addButtonPress}>
-            <Text style={styles.addButton}>Add</Text>
+            <Text style={styles.addButton}>{TEXT.ADD}</Text>
           </TouchableOpacity>
         )}
       </TouchableOpacity>

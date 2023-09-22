@@ -1,5 +1,4 @@
 import {
-  StyleSheet,
   Text,
   View,
   SafeAreaView,
@@ -8,12 +7,12 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HorizontalDatepicker from "@awrminkhodaei/react-native-horizontal-datepicker";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import * as Location from "expo-location";
 import { deliveryTime, times } from "../utils/constant";
-import { onChangeText } from "deprecated-react-native-prop-types/DeprecatedTextInputPropTypes";
 import { styles } from "./styles/pickUpStyles";
 
 const PickUpScreen = () => {
@@ -24,9 +23,30 @@ const PickUpScreen = () => {
     .reduce((curr, prev) => curr + prev, 0);
   const [selectedTime, setSelectedTime] = useState([]);
   const [delivery, setDelivery] = useState([]);
+  const [displayCurrentAddress, setDisplayCurrentAddress] = useState("");
 
   const navigation = useNavigation();
   const date = new Date();
+
+  useEffect(() => {
+    getCurrentLocation();
+  }, []);
+
+  const getCurrentLocation = async () => {
+    const { coords } = await Location.getCurrentPositionAsync();
+    if (coords) {
+      const { latitude, longitude } = coords;
+      let response = await Location.reverseGeocodeAsync({
+        latitude,
+        longitude,
+      });
+      for (let item of response) {
+        let address = `${item.name} ${item.city} ${item.subregion}, ${item.region} ${item.country}, ${item.postalCode}`;
+        setDisplayCurrentAddress(address);
+      }
+    }
+  };
+
   const proceedToCart = () => {
     if (!selectedDate || !selectedTime || !delivery) {
       Alert.alert(
@@ -61,6 +81,7 @@ const PickUpScreen = () => {
         <TextInput
           style={styles.addressTextInput}
           multiline
+          value={displayCurrentAddress}
         />
 
         <Text style={styles.pickUpDate}>
@@ -70,7 +91,6 @@ const PickUpScreen = () => {
           mode="gregorian"
           startDate={new Date()}
           endDate={new Date(date.getFullYear(), date.getMonth() + 1, 1)}
-          // initialSelectedDate={new Date("2020-08-22")}
           onSelectedDateChange={(date) => setSelectedDate(date)}
           selectedItemWidth={170}
           unselectedItemWidth={38}
@@ -78,7 +98,7 @@ const PickUpScreen = () => {
           itemRadius={10}
           selectedItemTextStyle={styles.selectedItemTextStyle}
           unselectedItemTextStyle={styles.selectedItemTextStyle}
-          selectedItemBackgroundColor="#222831"
+          selectedItemBackgroundColor="#007AFF"
           unselectedItemBackgroundColor="#ececec"
           flatListContainerStyle={styles.flatListContainerStyle}
         />

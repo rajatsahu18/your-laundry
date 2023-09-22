@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  homeScroll: { backgroundColor: "#E7E9EB", flex: 1, marginTop: 50 },
+  homeScroll: { backgroundColor: "#E7E9EB", flex: 1, marginTop: 35 },
   locationAndProfile: {
     flexDirection: "row",
     alignItems: "center",
@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     borderRadius: 7,
   },
   totalButton: {
-    backgroundColor: "#088F8F",
+    backgroundColor: "#007AFF",
     padding: 15,
     marginBottom: 15,
     margin: 15,
@@ -32,4 +32,10 @@ export const styles = StyleSheet.create({
   },
   totalItemAndPrice: { fontSize: 17, fontWeight: "600", color: "white" },
   proceed: { fontSize: 17, fontWeight: "600", color: "white" },
+  loadingView: {
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    flex: 1,
+  },
 });
